@@ -71,3 +71,60 @@ conexao.close()
 
                  
   
+
+
+
+
+import sqlite3
+
+conexao=sqlite3.connect("Banco.db")
+cursor=conexao.cursor()
+
+cursor.execute("""CREATE TABLE honorarios.RES(
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   Atendimento INTEGER NOT NULL,
+                  Nome TEXT,
+                   Procedimento
+                   cobrar TEXT
+                   Data DATE)""")
+                
+def atendimento():
+    return input("Digite o atendimento: ")
+def Nome():
+    return input("Digite o nome: ")
+def procedimento ():
+    return input("Digite o procedimento")
+def cobranca():
+    return input("Digite o que vai cobrar: ")
+
+while True:
+    
+    print("\n Faturamento controle de cobranças RES")
+    
+    registro =atendimento()
+    name=Nome()
+    Procedimento=procedimento()
+    Cobranca=cobranca()
+    
+    cursor.execute("""INSERT INTO(Atendimento,Nome,Procedimento,cobrar,Data)
+                      VALUES(?,?,?,?)""",(registro,name,Procedimento,Cobranca))
+   print("\n Informações alimentadas com sucesso")
+
+   desejo=input("Deseja continuar cadastrando s/n?").strip().lower()
+    if desejo=='n':
+        break
+   conexao.commit()
+
+   conexao.close()
+
+
+
+
+
+
+
+
+
+
+
+
