@@ -1,74 +1,95 @@
-
 import sqlite3
+from datatime import datetime
 
-conexao = sqlite3.connect("Banco.db")
-cursor = conexao.cursor()
+conexao=sqlite3.connect('Banco.db')
+cursor=conexao.cursor()
 
-cursor.execute("""CREATE TABLE IF NOT EXISTS Pratileira(
-                   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   Atendimento INTEGER NOT NULL,
-                   Nome TEXT NOT NULL,
-                   Data DATE NOT NULL,
-                   Pasta1 TEXT,
-                   Pasta2 TEXT,
-                   Pasta3 TEXT,
-                   Situacao TEXT
-)""")
+cursor.execute("""CREATE TABLE faturamento(
+                  id INTEGER PRIMARY KEY AUTOINCREMNT 
+                  Convenio TEXT NOT NULl,
+                  Tabela_Honorarios TEXT NOT NULL,
+                  Tabela_Medicamentos TEXT NOT NULL,
+                  Tabela_Materiais TEXT NOT NULL,
+                  Fisioterapia_Andares INTEGER NOT NULL,
+                  Fisioterapia_Uti INTEGER NOT NULL,
+                  Fonoaudiologia INTEGER NOT NULL,
+                  Data DATE NOT NULL)""")
+cursor.commit()
 
-def atendimento():
-    return int(input("\nDigite o atendimento: "))
+def convenio():
+    while True:
+        convenio=input("Digite o nome do convênio a ser cadastrado: ")
+        
+        if convenio.replance(" "," ").isalpha():
+            return convenio
+        else:
+            print("Nome invalido")
+            
+def honorarios():
+    while True:
+        tabela_honorarios=input("Digite a tabela de honorários medicos  acordada: ")
+        
+        if tabela_horarios.replance(" "," ").isalpha():
+           return tabela_honorarios
+        else:
+            print("Digite uma tabela valida")
 
-def nome():
-    return input("\nDigite o nome: ")
+def medicamentos():
+    while True:
+        tabela_medicamentos=input("Digite a tabela de medicamentos acordado: ")
+        
+        if tabela_medicamentos.replance(" "," ").isalpha():
+             return tabela_medicamentos()
+        else:
+            print("Digite uma tabela valida")
 
-def data_periodo():
-    return input("\nDigite a data em que se inicia o periodo da conta: ")
+def materiais():
+    while True:
+        tabela_materiais=input("Digite a tabela de materiais acordado: )
+        if tabela_materiais.replance(" "," ").isalpha():
+            return tabela_materiais
+        else:
+          print("Digite uma tabela valida")
 
-def Pasta1():
-    return input("\nDigite a situação da pasta1, RECEBIDA / NAO RECEBIDA: ").strip().upper()
+def fisioterapia_clinica():
+    while True:
+        try:
+            fisioterapia_clinica= int(input("Qual a quantidade permitida de cobrança de consulta fisioterapia unidade de internação ?"))
+            return fisioterapia_clinica
+        except ValuesError:
+            print("Digite apenas numeros")
+            
+def fisioterapia_uti():
+    try:
+        fisioterapia_uti=int(input("Qual a quantidade permitida de cobrança de consulta fisioterapia na UTI adulto /UTI neo ?"))
+        return fisioterapia_uti
+    except ValuesError:
+        print("Digite apenas numeros")
+        
+def fono():
+    try:
+       consulta_fono=int(input("Qual a quantida permitida de cobrança consulta com fonoaudióloga por dia ? "))
+       return consulta_fono
+    except:
+        print("Digite apenas numeros")
+        
+def data():
+    return datetime.now().strftime("%d/m/y")
+    
+Faturamento=[]
 
-def pasta2():
-    return input("\nDigite a situação da pasta2, RECEBIDA / NAO RECEBIDA: ").strip().upper()
 
-def pasta3():
-    return input("\nDigite a situação da pasta3, RECEBIDA / NAO RECEBIDA: ").strip().upper()
-
-while True:
-
-    print("\n LANÇADOR DE DADOS: Prateleira do Faturamento")
-
-    Atendimento = atendimento()
-    Data = data_periodo()
-    NOME = nome()
-
-    PASTA1 = Pasta1()
-    PASTA2 = pasta2()
-    PASTA3 = pasta3()
-
-    SITUACAO = ""
-
-    if PASTA1 == "RECEBIDA" and PASTA2 == "RECEBIDA" and PASTA3 == "RECEBIDA":
-        SITUACAO = "FINALIZADAS"
-    else:
-        SITUACAO = "PENDENTES"
-
-    cursor.execute("""INSERT INTO Pratileira
-                   (Atendimento, Nome, Data, Pasta1, Pasta2, Pasta3, Situacao)
-                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                   (Atendimento, NOME, Data, PASTA1, PASTA2, PASTA3, SITUACAO))
-
-    conexao.commit()
-
-    print("\nCadastro feito com sucesso!!!")
-    print("Situação:", SITUACAO)
-
-    desejo = input("\nDeseja continuar cadastrando? S/N: ").strip().lower()
-
-    if desejo == 'n':
-        break
-
-conexao.close()
-
+   
+        
+        
+    
+            
+        
+    
+          
+         
+            
+        
                  
   
 
