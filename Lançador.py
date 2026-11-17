@@ -16,7 +16,7 @@ cursor.execute("""CREATE TABLE faturamento(
                   Data DATE NOT NULL)""")
 cursor.commit()
 
-def convenio():
+def convenios():
     while True:
         convenio=input("Digite o nome do convênio a ser cadastrado: ")
         
@@ -78,8 +78,38 @@ def data():
     
 Faturamento=[]
 
-
-   
+while True:
+    print("\nCadastrador de Convenios")
+    print("1-Para cadastrar informações ")
+    print("2-Para pesquisar por convenio")
+    print("3-Para alterar informação cadastrada")
+    print("4-Para acessar todos os convênios cadastrados")
+    print("5-Para sair")
+    
+    escolha=input("Digite qual a opcao desejada: ")
+    if escolha=='1':
+        while True:
+            convenio={}
+            convenio['Nome']=convenios()
+            convenio['Honorario']=honorarios()
+            convenio['Tabela_medicamentos']=medicamentos()
+            convenio['Tabela_materiais']=materiais()
+            convenio['Fisio_andares']=fisioterapia_clinica()
+            convenio['Fisio_uti']=fisioterapia_uti()
+            convenio['Fono']=fono()
+            convenio['Data']=data()
+            Faturamento.append(convenio)
+            cursor.execute("""INSERT INTO faturamento(Convenio,Tabela_Honorarios,Tabela_Medicamentos,Tabela_Materiais,Fisioterapia_Andares,Fisioterapia_Uti,Fonoaudiologia,Data)
+                              VALUES(?,?,?,?,?,?,?,?)""",(convenio['Nome'],convenio[Honorario],convenio[Tabela_medicamento],convenio[Tabela_materiais],convenio['Fisio_andares'],convenio[Fisio_uti],convenio[Fono],convenio['Data']))
+            cursor.commit()
+            
+            print("\nCadastro feito com sucesso!!!")
+            
+            desejo=input("Deseja continuar cadastrado S/N").strip().lower()
+            if desejo=='n':
+                break
+            
+    
         
         
     
