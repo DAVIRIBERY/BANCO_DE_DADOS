@@ -130,6 +130,30 @@ while True:
             
     elif escolha=='2':
         
+        pesquisa=input("Digite o nome do convênio que deseja pesquisar: ").strip().lower()
+        
+        cursor.execute("""SELECT*FROM faturamento
+                          WHERE LOWER(convenio)=?""",
+                          (pesquisa,))
+        Resultado=cursor.fetchall()
+        
+        if resultado:
+            for registro in resultado:
+                print("\----CONVENIO----")
+                print(f"ID: {registro[0]}")
+                print(f"CONVÊNIO: {registro[1]}")
+                print(f"TABELA HONORÁRIOS: {registro[2]}")
+                print(f"TABELA MEDICAMENTOS: {registro[3]}")
+                print(f"TABELA MATERIAIS: {registro[4]})
+                print(f"FISIOTERAPIA ANDARES: {registro[5]}")
+                print(f"FISIOTERAPIA UTI: {registro[6]}")
+                print(f"FONOAUDIOLOGIA: {registro[7]}")
+                print(f"DATA DO CADASTRO: {registro[8]}")
+                print("-"*60)
+        else:
+            print("Convenio não econtrado ")
+                
+        
         
     
             
