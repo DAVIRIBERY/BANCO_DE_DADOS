@@ -1,5 +1,5 @@
 import sqlite3
-from datatime import datetime
+from datetime import datetime
 
 conexao=sqlite3.connect('Banco.db')
 cursor=conexao.cursor()
