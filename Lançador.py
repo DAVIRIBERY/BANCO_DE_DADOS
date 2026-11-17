@@ -6,7 +6,7 @@ cursor=conexao.cursor()
 
 cursor.execute("""CREATE TABLE faturamento(
                   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                  Convenio TEXT NOT NULl,
+                  Convenio TEXT NOT NULL,
                   Tabela_Honorarios TEXT NOT NULL,
                   Tabela_Medicamentos TEXT NOT NULL,
                   Tabela_Materiais TEXT NOT NULL,
