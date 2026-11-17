@@ -5,7 +5,7 @@ conexao=sqlite3.connect('Banco.db')
 cursor=conexao.cursor()
 
 cursor.execute("""CREATE TABLE faturamento(
-                  id INTEGER PRIMARY KEY AUTOINCREMNT 
+                  id INTEGER PRIMARY KEY AUTOINCREMENT, 
                   Convenio TEXT NOT NULl,
                   Tabela_Honorarios TEXT NOT NULL,
                   Tabela_Medicamentos TEXT NOT NULL,
@@ -60,17 +60,19 @@ def fisioterapia_clinica():
             print("Digite apenas numeros")
             
 def fisioterapia_uti():
-    try:
+    while True:
+      try:
         fisioterapia_uti=int(input("Qual a quantidade permitida de cobrança de consulta fisioterapia na UTI adulto /UTI neo ?"))
         return fisioterapia_uti
-    except ValuesError:
+      except ValuesError:
         print("Digite apenas numeros")
         
 def fono():
-    try:
-       consulta_fono=int(input("Qual a quantida permitida de cobrança consulta com fonoaudióloga por dia ? "))
-       return consulta_fono
-    except:
+    while True:
+       try:
+        consulta_fono=int(input("Qual a quantida permitida de cobrança consulta com fonoaudióloga por dia ? "))
+        return consulta_fono
+       except:
         print("Digite apenas numeros")
         
 def data():
@@ -99,8 +101,22 @@ while True:
             convenio['Fono']=fono()
             convenio['Data']=data()
             Faturamento.append(convenio)
-            cursor.execute("""INSERT INTO faturamento(Convenio,Tabela_Honorarios,Tabela_Medicamentos,Tabela_Materiais,Fisioterapia_Andares,Fisioterapia_Uti,Fonoaudiologia,Data)
-                              VALUES(?,?,?,?,?,?,?,?)""",(convenio['Nome'],convenio[Honorario],convenio[Tabela_medicamento],convenio[Tabela_materiais],convenio['Fisio_andares'],convenio[Fisio_uti],convenio[Fono],convenio['Data']))
+            cursor.execute("""INSERT INTO faturamento(Convenio,
+                                                      Tabela_Honorarios,
+                                                      Tabela_Medicamentos,
+                                                      Tabela_Materiais,
+                                                      Fisioterapia_Andares,
+                                                      Fisioterapia_Uti,
+                                                      Fonoaudiologia,
+                                                      Data)
+                             VALUES(?,?,?,?,?,?,?,?)""",(convenio['Nome'],
+                                                           convenio['Honorario'],
+                                                           convenio['Tabela_medicamento'],
+                                                           convenio['Tabela_materiais'],
+                                                           convenio['Fisio_andares'],
+                                                           convenio['Fisio_uti'],
+                                                           convenio['Fono'],
+                                                           convenio['Data']))
             cursor.commit()
             
             print("\nCadastro feito com sucesso!!!")
