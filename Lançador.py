@@ -137,8 +137,8 @@ while True:
                           (pesquisa,))
         Resultado=cursor.fetchall()
         
-        if resultado:
-            for registro in resultado:
+        if Resultado:
+            for registro in Resultado:
                 print("\----CONVENIO----")
                 print(f"ID: {registro[0]}")
                 print(f"CONVÊNIO: {registro[1]}")
