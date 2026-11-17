@@ -88,7 +88,8 @@ while True:
     print("4-Para acessar todos os convênios cadastrados")
     print("5-Para sair")
     
-    escolha=input("Digite qual a opcao desejada: ")
+    escolha=input("\n Digite qual a opcao desejada: ")
+
     if escolha=='1':
         while True:
             convenio={}
@@ -100,23 +101,25 @@ while True:
             convenio['Fisio_uti']=fisioterapia_uti()
             convenio['Fono']=fono()
             convenio['Data']=data()
-            Faturamento.append(convenio)
-            cursor.execute("""INSERT INTO faturamento(Convenio,
-                                                      Tabela_Honorarios,
-                                                      Tabela_Medicamentos,
-                                                      Tabela_Materiais,
-                                                      Fisioterapia_Andares,
-                                                      Fisioterapia_Uti,
-                                                      Fonoaudiologia,
-                                                      Data)
-                             VALUES(?,?,?,?,?,?,?,?)""",(convenio['Nome'],
-                                                           convenio['Honorario'],
-                                                           convenio['Tabela_medicamento'],
-                                                           convenio['Tabela_materiais'],
-                                                           convenio['Fisio_andares'],
-                                                           convenio['Fisio_uti'],
-                                                           convenio['Fono'],
-                                                           convenio['Data']))
+            Faturamento.append(convenio)         
+            cursor.execute("""INSERT INTO faturamento(
+                                           Convenio,
+                                           Tabela_Honorarios,
+                                           Tabela_Medicamentos,
+                                           Tabela_Materiais,
+                                           Fisioterapia_Andares,
+                                           Fisioterapia_Uti,
+                                           Fonoaudiologia,
+                                           Data)
+                             VALUES(?,?,?,?,?,?,?,?)""",
+                                           (convenio['Nome'],
+                                            convenio['Honorario'],
+                                            convenio['Tabela_medicamento'],
+                                            convenio['Tabela_materiais'],
+                                            convenio['Fisio_andares'],
+                                            convenio['Fisio_uti'],
+                                            convenio['Fono'],
+                                            convenio['Data']))
             cursor.commit()
             
             print("\nCadastro feito com sucesso!!!")
@@ -125,7 +128,7 @@ while True:
             if desejo=='n':
                 break
             
-    
+    elif escolha=='2':
         
         
     
