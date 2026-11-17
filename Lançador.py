@@ -129,7 +129,8 @@ while True:
                 break
             
     elif escolha=='2':
-        
+        while True:
+            
         pesquisa=input("Digite o nome do convênio que deseja pesquisar: ").strip().lower()
         
         cursor.execute("""SELECT*FROM faturamento
@@ -150,6 +151,9 @@ while True:
                 print(f"FONOAUDIOLOGIA: {registro[7]}")
                 print(f"DATA DO CADASTRO: {registro[8]}")
                 print("-"*60)
+                desejo=input("\nDeseja pesquisar outro convênio ? S/N").strip().lower()
+                if desejo=='n':
+                    break
         else:
             print("Convenio não econtrado ")
                 
