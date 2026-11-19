@@ -81,66 +81,83 @@ def data():
 Faturamento=[]
 
 while True:
-    print("\nCadastrador de Convenios")
-    print("1-Para cadastrar informações ")
-    print("2-Para pesquisar por convenio")
-    print("3-Para alterar informação cadastrada")
-    print("4-Para acessar todos os convênios cadastrados")
-    print("5-Para sair")
-    
-    escolha=input("\n Digite qual a opcao desejada: ")
+   
+print("\nCadastrador de Convênios")
+print("1- Para cadastrar informações")
+print("2- Para pesquisar por convênio")
+print("3- Para alterar informação cadastrada")
+print("4- Para acessar todos os convênios cadastrados")
+print("5- Para sair")
 
-    if escolha=='1':
-        while True:
-            convenio={}
-            convenio['Nome']=convenios()
-            convenio['Honorario']=honorarios()
-            convenio['Tabela_medicamentos']=medicamentos()
-            convenio['Tabela_materiais']=materiais()
-            convenio['Fisio_andares']=fisioterapia_clinica()
-            convenio['Fisio_uti']=fisioterapia_uti()
-            convenio['Fono']=fono()
-            convenio['Data']=data()
-            Faturamento.append(convenio)         
-            cursor.execute("""INSERT INTO faturamento(
-                                           Convenio,
-                                           Tabela_Honorarios,
-                                           Tabela_Medicamentos,
-                                           Tabela_Materiais,
-                                           Fisioterapia_Andares,
-                                           Fisioterapia_Uti,
-                                           Fonoaudiologia,
-                                           Data)
-                             VALUES(?,?,?,?,?,?,?,?)""",
-                                           (convenio['Nome'],
-                                            convenio['Honorario'],
-                                            convenio['Tabela_medicamento'],
-                                            convenio['Tabela_materiais'],
-                                            convenio['Fisio_andares'],
-                                            convenio['Fisio_uti'],
-                                            convenio['Fono'],
-                                            convenio['Data']))
-            cursor.commit()
-            
-            print("\nCadastro feito com sucesso!!!")
-            
-            desejo=input("Deseja continuar cadastrado S/N").strip().lower()
-            if desejo=='n':
-                break
-            
-    elif escolha=='2':
-        while True:
-            
-        pesquisa=input("Digite o nome do convênio que deseja pesquisar: ").strip().lower()
-        
-        cursor.execute("""SELECT*FROM faturamento
-                          WHERE LOWER(convenio)=?""",
-                          (pesquisa,))
-        Resultado=cursor.fetchall()
-        
+escolha = input("\nDigite qual a opção desejada: ").strip()
+
+if escolha == '1':
+
+    while True:
+        convenio = {}
+
+        convenio['Nome'] = convenios()
+        convenio['Honorario'] = honorarios()
+        convenio['Tabela_medicamentos'] = medicamentos()
+        convenio['Tabela_materiais'] = materiais()
+        convenio['Fisio_andares'] = fisioterapia_clinica()
+        convenio['Fisio_uti'] = fisioterapia_uti()
+        convenio['Fono'] = fono()
+        convenio['Data'] = data()
+
+        Faturamento.append(convenio)
+
+        cursor.execute("""INSERT INTO faturamento(
+                            Convenio,
+                            Tabela_Honorarios,
+                            Tabela_Medicamentos,
+                            Tabela_Materiais,
+                            Fisioterapia_Andares,
+                            Fisioterapia_Uti,
+                            Fonoaudiologia,
+                            Data)
+                          VALUES(?,?,?,?,?,?,?,?)""",
+
+                       (convenio['Nome'],
+                        convenio['Honorario'],
+                        convenio['Tabela_medicamentos'],
+                        convenio['Tabela_materiais'],
+                        convenio['Fisio_andares'],
+                        convenio['Fisio_uti'],
+                        convenio['Fono'],
+                        convenio['Data']))
+
+        Conexao.commit()
+
+        print("\nCadastro feito com sucesso!!!")
+
+        desejo = input(
+            "Deseja continuar cadastrando? S/N: "
+        ).strip().lower()
+
+        if desejo == 'n':
+            break
+
+
+elif escolha == '2':
+
+    while True:
+
+        pesquisa = input(
+            "\nDigite o nome do convênio que deseja pesquisar: "
+        ).strip().lower()
+
+        cursor.execute("""SELECT * FROM faturamento
+                          WHERE LOWER(Convenio)=?""",
+                       (pesquisa,))
+
+        Resultado = cursor.fetchall()
+
         if Resultado:
+
             for registro in Resultado:
-                print("\----CONVENIO----")
+
+                print("\n---- CONVÊNIO ----")
                 print(f"ID: {registro[0]}")
                 print(f"CONVÊNIO: {registro[1]}")
                 print(f"TABELA HONORÁRIOS: {registro[2]}")
@@ -150,12 +167,18 @@ while True:
                 print(f"FISIOTERAPIA UTI: {registro[6]}")
                 print(f"FONOAUDIOLOGIA: {registro[7]}")
                 print(f"DATA DO CADASTRO: {registro[8]}")
-                print("-"*60)
-                desejo=input("\nDeseja pesquisar outro convênio ? S/N").strip().lower()
-                if desejo=='n':
-                    break
+                print("-" * 60)
+
         else:
-            print("Convenio não econtrado ")
+            print("\nConvênio não encontrado!")
+
+        desejo = input(
+            "\nDeseja pesquisar outro convênio? S/N: "
+        ).strip().lower()
+
+        if desejo == 'n':
+            break
+
                 
         
         
