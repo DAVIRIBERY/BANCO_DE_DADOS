@@ -145,7 +145,7 @@ while True:
                 print(f"CONVÊNIO: {registro[1]}")
                 print(f"TABELA HONORÁRIOS: {registro[2]}")
                 print(f"TABELA MEDICAMENTOS: {registro[3]}")
-                print(f"TABELA MATERIAIS: {registro[4]})
+                print(f"TABELA MATERIAIS: {registro[4]}")
                 print(f"FISIOTERAPIA ANDARES: {registro[5]}")
                 print(f"FISIOTERAPIA UTI: {registro[6]}")
                 print(f"FONOAUDIOLOGIA: {registro[7]}")
